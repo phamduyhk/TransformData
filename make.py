@@ -38,29 +38,56 @@ stores = {'2:花堂店', '3:春江店', '1:大願寺店'}
 list = glob.glob("./input/*.xlsx")
 
 
-data_1 = pd.DataFrame()
-data_2 = pd.DataFrame()
-data_3 = pd.DataFrame()
+data_1_2018 = pd.DataFrame()
+data_1_2017 = pd.DataFrame()
+data_1_2016 = pd.DataFrame()
+data_1_2015 = pd.DataFrame()
+
+data_2_2018 = pd.DataFrame()
+data_2_2017 = pd.DataFrame()
+data_2_2016 = pd.DataFrame()
+data_2_2015 = pd.DataFrame()
+
+data_3_2018 = pd.DataFrame()
+data_3_2017 = pd.DataFrame()
+data_3_2016 = pd.DataFrame()
+data_3_2015 = pd.DataFrame()
+
 
 for item in list:
     print("Preparing to read:"+str(item))
     try:
         data = pd.read_excel(item)
         for index,row in data.iterrows():
-        if row["店舗"] == "1:大願寺店":
-            data_1 = data_1.append(row,ignore_index=True)
-        elif row["店舗"] == "2:花堂店":
-            data_2 = data_2.append(row,ignore_index=True)
-        elif row["店舗"] == "3:春江店":
-            data_3 = data_3.append(row,ignore_index=True)
+            if row["店舗"] == "1:大願寺店":
+                if '2018' in row['計上日付']:
+                    data_1_2018 = data_1_2018.append(row,ignore_index=True)
+                if '2017' in row['計上日付']:
+                    data_1_2017 = data_1_2017.append(row,ignore_index=True)
+                if '2016' in row['計上日付']:
+                    data_1_2016 = data_1_2016.append(row,ignore_index=True)
+                if '2015' in row['計上日付']:
+                    data_1_2015 = data_1_2015.append(row,ignore_index=True)
+            elif row["店舗"] == "2:花堂店":
+                if '2018' in row['計上日付']:
+                    data_2_2018 = data_2_2018.append(row,ignore_index=True)
+                if '2017' in row['計上日付']:
+                    data_2_2017 = data_2_2017.append(row,ignore_index=True)
+                if '2016' in row['計上日付']:
+                    data_2_2016 = data_2_2016.append(row,ignore_index=True)
+                if '2015' in row['計上日付']:
+                    data_2_2015 = data_2_2015.append(row,ignore_index=True)
+            elif row["店舗"] == "3:春江店":
+                if '2018' in row['計上日付']:
+                    data_3_2018 = data_3_2018.append(row,ignore_index=True)
+                if '2017' in row['計上日付']:
+                    data_3_2017 = data_3_2017.append(row,ignore_index=True)
+                if '2016' in row['計上日付']:
+                    data_3_2016 = data_3_2016.append(row,ignore_index=True)
+                if '2015' in row['計上日付']:
+                    data_3_2015 = data_3_2015.append(row,ignore_index=True)
     except Exception as ex:
         print('can not read file {} {}'.format(item, ex))
-
-
-
-# print(data_1)
-# print(data_2)
-# print(data_3)
 
 
 """
@@ -75,10 +102,34 @@ if os.path.exists(os.path.dirname(output_path)) is False:
     except OSError as ex:  # Guard against race condition
         raise ValueError('Folder is not exist {}'.format(output_path))
       
-output1 ='output/1.csv'
-output2 ='output/2.csv'
-output3 ='output/3.csv'
+output1 ='output/store1_2018.csv'
+output2 ='output/store1_2017.csv'
+output3 ='output/store1_2016.csv'
+output4 ='output/store1_2015.csv'
 
-data_1.to_csv(output)
-data_1.to_csv(output)
-data_1.to_csv(output)
+output21 ='output/store2_2018.csv'
+output22 ='output/store2_2017.csv'
+output23 ='output/store2_2016.csv'
+output24 ='output/store2_2015.csv'
+
+output31 ='output/store3_2018.csv'
+output32 ='output/store3_2017.csv'
+output33 ='output/store3_2016.csv'
+output34 ='output/store3_2015.csv'
+
+
+data_1.to_csv(output1)
+data_1_2018.to_csv(output1)
+data_1_2017.to_csv(output2)
+data_1_2016.to_csv(output3)
+data_1_2015.to_csv(output4)
+
+data_2_2018.to_csv(output21)
+data_2_2017.to_csv(output22)
+data_2_2016.to_csv(output23)
+data_2_2015.to_csv(output24)
+
+data_3_2018.to_csv(output31)
+data_3_2017.to_csv(output32)
+data_3_2016.to_csv(output33)
+data_3_2015.to_csv(output34)
