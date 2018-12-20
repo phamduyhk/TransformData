@@ -46,16 +46,15 @@ for item in list:
     print("Preparing to read:"+str(item))
     try:
         data = pd.read_excel(item)
-    except Exception as ex:
-        print('can not read file {} {}'.format(item, ex))
-    list_of_category = set()
-    for index,row in data.iterrows():
+        for index,row in data.iterrows():
         if row["店舗"] == "1:大願寺店":
             data_1 = data_1.append(row,ignore_index=True)
         elif row["店舗"] == "2:花堂店":
             data_2 = data_2.append(row,ignore_index=True)
         elif row["店舗"] == "3:春江店":
             data_3 = data_3.append(row,ignore_index=True)
+    except Exception as ex:
+        print('can not read file {} {}'.format(item, ex))
 
 
 
@@ -75,8 +74,11 @@ if os.path.exists(os.path.dirname(output_path)) is False:
         os.makedirs(os.path.dirname(output_path))
     except OSError as ex:  # Guard against race condition
         raise ValueError('Folder is not exist {}'.format(output_path))
+      
 output1 ='output/1.csv'
-output1 ='output/2.csv'
-output1 ='output/3.csv'
-temp.to_csv(output,encoding="utf_8_sig")
-    
+output2 ='output/2.csv'
+output3 ='output/3.csv'
+
+data_1.to_csv(output)
+data_1.to_csv(output)
+data_1.to_csv(output)
