@@ -34,6 +34,7 @@ def get_list_of_category(data,category):
 """
 list = glob.glob("*.xlsx")
 
+
 data_1 = pd.DataFrame()
 data_2 = pd.DataFrame()
 data_3 = pd.DataFrame()
@@ -47,14 +48,17 @@ for item in list:
     list_of_category = set()
     for index,row in data.iterrows():
         if row["店舗"] == "1:大願寺店":
-            data_1.append(row)
+            data_1 = data_1.append(row,ignore_index=True)
         elif row["店舗"] == "2:花堂店":
-            data_2.append(row)
+            data_2 = data_2.append(row,ignore_index=True)
         elif row["店舗"] == "3:春江店":
-            data_3.append(row)
-    break
+            data_3 = data_3.append(row,ignore_index=True)
+
+
 
 print(data_1)
+print(data_2)
+print(data_3)
 
 
 """
