@@ -5,10 +5,13 @@ import pandas as pd
 
 folder_path = "./input/"
 # if directory of file path is not exist >> make it
-if os.path.exists(os.path.dirname(folder_path)) is False:
-    raise ValueError('Folder is not exist {}'.format(folder_path))
+if not os.path.exists(os.path.dirname(folder_path)):
+    try:
+        os.makedirs(os.path.dirname(folder_path))
+    except OSError as ex:  # Guard against race condition
+        raise ValueError('can not make directory {} {}'.format(folder_path, ex))
 
-os.chdir(folder_path)
+
 
 # function
 """
@@ -29,10 +32,10 @@ def get_list_of_category(data,category):
 #process
 
 
-""" 
-'2:花堂店', '3:春江店', '1:大願寺店'
-"""
-list = glob.glob("*.xlsx")
+
+stores = {'2:花堂店', '3:春江店', '1:大願寺店'}
+
+list = glob.glob("./input/*.xlsx")
 
 
 data_1 = pd.DataFrame()
@@ -56,13 +59,24 @@ for item in list:
 
 
 
-print(data_1)
-print(data_2)
-print(data_3)
+# print(data_1)
+# print(data_2)
+# print(data_3)
 
 
 """
 save to csv file
 
-"""
 
+"""
+output_path = "./output/"
+if os.path.exists(os.path.dirname(output_path)) is False:
+    try:
+        os.makedirs(os.path.dirname(output_path))
+    except OSError as ex:  # Guard against race condition
+        raise ValueError('Folder is not exist {}'.format(output_path))
+output1 ='output/1.csv'
+output1 ='output/2.csv'
+output1 ='output/3.csv'
+temp.to_csv(output,encoding="utf_8_sig")
+    
