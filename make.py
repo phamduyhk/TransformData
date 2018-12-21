@@ -1,6 +1,7 @@
 import os
 import glob
 import pandas as pd
+from datetime import datetime
 
 
 folder_path = "./input/"
@@ -59,35 +60,37 @@ for item in list:
     try:
         data = pd.read_excel(item)
         for index,row in data.iterrows():
+            year = row['計上日付'].date().year
             if row["店舗"] == "1:大願寺店":
-                if '2018' in row['計上日付']:
+                if year == 2018 :
                     data_1_2018 = data_1_2018.append(row,ignore_index=True)
-                if '2017' in row['計上日付']:
+                if year == 2017 :
                     data_1_2017 = data_1_2017.append(row,ignore_index=True)
-                if '2016' in row['計上日付']:
+                if year == 2016 :
                     data_1_2016 = data_1_2016.append(row,ignore_index=True)
-                if '2015' in row['計上日付']:
+                if year == 2015 :
                     data_1_2015 = data_1_2015.append(row,ignore_index=True)
             elif row["店舗"] == "2:花堂店":
-                if '2018' in row['計上日付']:
+                if year == 2018 :
                     data_2_2018 = data_2_2018.append(row,ignore_index=True)
-                if '2017' in row['計上日付']:
+                if year == 2017 :
                     data_2_2017 = data_2_2017.append(row,ignore_index=True)
-                if '2016' in row['計上日付']:
+                if year == 2016 :
                     data_2_2016 = data_2_2016.append(row,ignore_index=True)
-                if '2015' in row['計上日付']:
+                if year == 2015 :
                     data_2_2015 = data_2_2015.append(row,ignore_index=True)
             elif row["店舗"] == "3:春江店":
-                if '2018' in row['計上日付']:
+                if year == 2018 :
                     data_3_2018 = data_3_2018.append(row,ignore_index=True)
-                if '2017' in row['計上日付']:
+                if year == 2017 :
                     data_3_2017 = data_3_2017.append(row,ignore_index=True)
-                if '2016' in row['計上日付']:
+                if year == 2016 :
                     data_3_2016 = data_3_2016.append(row,ignore_index=True)
-                if '2015' in row['計上日付']:
+                if year == 2015 :
                     data_3_2015 = data_3_2015.append(row,ignore_index=True)
     except Exception as ex:
         print('can not read file {} {}'.format(item, ex))
+    break
 
 
 """
@@ -118,7 +121,6 @@ output33 ='output/store3_2016.csv'
 output34 ='output/store3_2015.csv'
 
 
-data_1.to_csv(output1)
 data_1_2018.to_csv(output1)
 data_1_2017.to_csv(output2)
 data_1_2016.to_csv(output3)
